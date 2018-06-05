@@ -1,12 +1,28 @@
 package com.shopping.controller;
 
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.shopping.model.RoundRangeData;
+import com.shopping.services.MapSerializer;
+import com.shopping.services.SpecialMap;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.shopping.dao.UserDao;
+
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/")
@@ -118,4 +134,28 @@ public class MainController {
 
 	}*/
 
+    @RequestMapping(value = "/zone/settings/ranged/update", method = {RequestMethod.POST}, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Map<String, Object>> zoneSettingsRangedUpdate(
+            @RequestBody RoundRangeData data
+    ) throws IOException {
+
+        Map<String, Object> model = new HashMap<>();
+        ObjectMapper mapper = new ObjectMapper();
+
+        SimpleModule module = new SimpleModule();
+        module.addSerializer(SpecialMap.class, new MapSerializer());
+        mapper.registerModule(module);
+
+        String serialized = mapper.writeValueAsString(data);
+       // return serialized;
+        model.put("request", serialized);
+        model.put("success",true);
+
+        return new ResponseEntity<Map<String, Object>>(model, HttpStatus.OK);
+    }
+
+    @RequestMapping(value="/modifiedPolygon",method = RequestMethod.POST,consumes = "application/json")
+    public ResponseEntity<JSONObject> modifiedPolygon(@RequestBody JSONObject data, HttpServletRequest request, ModelMap model) {
+        return new ResponseEntity<JSONObject>(data,HttpStatus.OK);
+    }
 }
