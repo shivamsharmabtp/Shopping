@@ -63,7 +63,7 @@ public class ShoppingServletConfig extends WebMvcConfigurerAdapter{
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
         dataSource.setUrl("jdbc:mysql://localhost:3306/shop");
         dataSource.setUsername("root");
-        dataSource.setPassword("root");
+        dataSource.setPassword("");
         return dataSource;
 	}
 	//Create a transaction manager

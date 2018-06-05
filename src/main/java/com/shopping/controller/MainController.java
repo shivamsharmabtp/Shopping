@@ -1,41 +1,31 @@
 package com.shopping.controller;
 
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.LockedException;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.shopping.dao.UserDao;
-import com.shopping.entity.User;
 
 @Controller
 @RequestMapping("/")
 public class MainController {
-	@Autowired
-	UserDao userDao;
-	
+  //  @Autowired
+  //  UserDao userDao;
 
-	@RequestMapping(value = { "/", "/welcome**" }, method = RequestMethod.GET)
-	public String defaultPage() {
+
+    @RequestMapping(value = {"/", "/welcome**"}, method = RequestMethod.GET)
+    public String defaultPage() {
 
 		/*ModelAndView model = new ModelAndView();
 		model.addObject("title", "Spring Security + Hibernate Example");
 		model.addObject("message", "This is default page!");
 		model.setViewName("ProductManagement");
-*/		return "ProductManagement";
+*/
+        return "ProductManagement";
 
-	}
+    }
 
 	/*@RequestMapping(value = "/admin**", method = RequestMethod.GET)
 	public ModelAndView adminPage() {

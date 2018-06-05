@@ -41,8 +41,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
 		.usernameParameter("username")
 		.passwordParameter("password")	
 		.and().logout().logoutSuccessUrl("/login?logout")
-		.and().csrf()
-		.and().exceptionHandling().accessDeniedPage("/403");
+		.and().csrf().disable();
+		//.and().exceptionHandling().accessDeniedPage("/403");
 	}
 	/*@Bean
 	public BasicAuthenticationEntryPoint getBasicAuthenticationEntryPoint(){
@@ -57,8 +57,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
 	    return super.authenticationManagerBean();
 	}*/
 
+
 	
 	
-	
-	
+
 }
